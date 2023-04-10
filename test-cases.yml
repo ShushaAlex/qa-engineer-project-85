@@ -1,0 +1,181 @@
+---
+- summary: |
+    1. Авторизация через аккаунт Github
+  requirement: |
+    Пользователь может авторизоваться на сайте через аккаунт Github
+  prerequisites: |
+    открыта страница https://codebattle.hexlet.io/
+    есть аккаунт на github.com
+  test-data: |
+    empty
+  steps:
+    - Кликаем на кнопку "Sign up"
+    - Кликаем на кнопку "Sign in with Github"
+    - После перенаправления на страницу github.com кликнуть на кнопку "Authorize vtm9"
+  expected-result: |
+    Пользователь должен попасть на главную страницу codebattle, справа вверху отображается имя пользователя
+
+- summary: |
+    2. Авторизация через аккаунт Discord
+  requirement: |
+    Пользователь может авторизоваться на сайте через аккаунт Discord
+  prerequisites: |
+    открыта страница https://codebattle.hexlet.io/
+    есть аккаунт на Discord.com
+  test-data: |
+    empty
+  steps:
+    - Кликаем на кнопку "Sign up"
+    - Кликаем на кнопку "Sign in with Discord"
+    - После перенаправления на страницу Discord.com вводим логи и пароль от аккаунта Discord
+    - Кликаем на кнопку "Вход"
+  expected-result: |
+    Пользователь должен попасть на главную страницу codebattle, справа вверху отображается имя пользователя
+
+- summary: |
+    3. Создание аккаунта через Email
+  requirement: |
+    Пользователь может создать аккаунт, указав Email и пароль
+  prerequisites:
+    открыта страница https://codebattle.hexlet.io/
+  test-data: |
+    - Nickname = qwerty 
+    - Email = badpass@mail.com
+    - Password = strongPassword
+  steps:
+    - Кликаем на кнопку "Sign up"
+    - Вводим Nickname
+    - Вводим Email
+    - Вводим Password
+    - Вводим Password повторно
+    - Нажимаем кнопку "Submit"
+  expected-result: |
+    Пользователь должен попасть на главную страницу справа вверху отображается имя пользователя
+
+- summary: |
+    4. Проверка входа пользователя через логин и пароль
+  requirement: |
+    Пользователь может успешно войти в аккаунт с зарегистрированным Email и паролем
+  prerequisites:
+    открыта страница https://codebattle.hexlet.io/
+    Создан аккаунт с данными Email = badpass@mail.com, Password = strongPassword
+  test-data: |
+    - Email = badpass@mail.com
+    - Password = strongPassword
+  steps:
+    - Кликаем на кнопку "Sign in"
+    - Вводим Email
+    - Вводим Password
+    - Нажимаем кнопку "Submit"
+  expected-result: |
+    Пользователь должен попасть на главную страницу, справа вверху отображается имя пользователя
+
+- summary: |
+    5. Проверка входа пользователя с незарегистрированным Email
+  requirement: |
+    При неправильном Email пользователь должен получить сообщение об ошибке
+  prerequisites:
+    открыта страница https://codebattle.hexlet.io/
+  test-data: |
+    - Email = badpass@mya.ru
+    - Password = strongPassword
+  steps:
+    - Кликаем на кнопку "Sign in"
+    - Вводим Email
+    - Вводим Password
+    - Нажимаем кнопку "Submit"
+  expected-result: |
+    Выводится сообщение об ошибке "EMAIL_NOT_FOUND", вход в аккаунт не произведен
+
+- summary: |
+    6. Проверка входа пользователя с верным Email и неверным паролем
+  requirement: |
+    При неправильном пароле пользователь должен получить сообщение об ошибке
+  prerequisites:
+    открыта страница https://codebattle.hexlet.io/
+    Создан аккаунт с данными Email = badpass@mail.com, Password = strongPassword
+  test-data: |
+    - Email = badpass@mail.com
+    - Password = wrongPassword
+  steps:
+    - Кликаем на кнопку "Sign in"
+    - Вводим Email
+    - Вводим Password
+    - Нажимаем кнопку "Submit"
+  expected-result: |
+    Выводится сообщение об ошибке "INVALID_PASSWORD", вход в аккаунт не произведен
+
+- summary: |
+    7. Добавление к существующему аккаунту авторизации через Github
+  requirement: |
+    Пользователь может добавить к зарегистрированному аккаунту способ авторизации через Github
+  prerequisites:
+    открыта страница настроек https://codebattle.hexlet.io/settings
+    Создан аккаунт с данными Email = badpass@mail.com, Password = strongPassword и произведен в него вход
+    есть аккаунт на github.com
+  test-data: |
+    empty
+  steps:
+    - Кликаем на кнопку "Link Github"
+    - После перенаправления на страницу github.com кликнуть на кнопку "Authorize vtm9"
+  expected-result: |
+    Пользователь перенаправлен обратно на страницу с настройками, в настройках появилась ссылка на авторизованный аккаунт github
+
+- summary: |
+    8. Добавление к существующему аккаунту авторизации через Discord
+  requirement: |
+    Пользователь может добавить к зарегистрированному аккаунту способ авторизации через Discord
+  prerequisites:
+    открыта страница настроек https://codebattle.hexlet.io/settings
+    Создан аккаунт с данными Email = badpass@mail.com, Password = strongPassword и произведен в него вход
+    есть аккаунт на Discord.com
+  test-data: |
+    empty
+  steps:
+    - Кликаем на кнопку "Link Discord"
+    - После перенаправления на страницу Discord.com вводим логи и пароль от аккаунта Discord
+    - Кликаем на кнопку "Вход"
+  expected-result: |
+    Пользователь перенаправлен обратно на страницу с настройками, в настройках появилась ссылка на авторизованный аккаунт Discord
+
+- summary: |
+    9. Изменение nickname
+  requirement: |
+    Пользователь может изменить свой nickname на другой, не занятый другим пользователем
+  prerequisites:
+    произведен вход в аккаунт с данными Email = badpass@mail.com, Password = strongPassword
+    открыта страница настроек https://codebattle.hexlet.io/settings
+  test-data: |
+    Nickname = newNick
+  steps:
+    - В поле "Your name" вводим Nickname
+    - Кликаем на кнопку "Save"
+    - Обновляем страницу
+  expected-result: |
+    Имя пользователя изменено и отображается справа вверху страницы
+
+- summary: |
+    10. Восстановление пароля
+  requirement: |
+    Пользователь может восстановить пароль
+  prerequisites:
+    создан аккаунт с данными Email = badpass@mail.com, Password = strongPassword
+    открыта страница https://codebattle.hexlet.io/
+    вход в аккаунт не произведен
+  test-data: |
+    Password = newPass
+    Email = badpass@mail.com
+  steps:
+    - Кликнуть на кнопку "Sign in"
+    - Кликнуть на кнопку "Forgot your password?"
+    - В поле "Email" ввести Email
+    - Кликнуть на кнопку "Submit" (на почту будет отправлено письмо со ссылкой для изменения пароля)
+    - Открыть письмо от noreply@codebattle-5f929.firebaseapp.com
+    - Кликнуть на ссылку из письма
+    - В поле "new password" ввести Password и кликнуть на "Submit"
+    - Вернуться на страницу codebattle и кликнуть на "sign in"
+    - Ввести Email и Password
+  expected-result: |
+    Произойдет вход в аккаунт
+
+
