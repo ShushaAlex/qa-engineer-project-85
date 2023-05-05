@@ -469,3 +469,86 @@
     - Нажимаем на кнопку "send"
   expected-result: |
     Комментарий отображается от имени пользователя
+
+- summary: |
+    28. Выигрыш
+  requirement: |
+    В случае правильного выполнения задания пользователь выигрывет
+  prerequisites:
+    открыта главная страница https://codebattle.hexlet.io/
+    произведен вход в аккаунт
+  test-data: |
+    задание - "rect_area"
+    решение - "const _ = require("lodash");
+    const R = require("rambda");
+    const solution = (width, length) => {
+    return width * length;};
+    module.exports = solution;"
+  steps:
+    - Кликаем на "create a game"
+    - В "game type" выбираем "with a bot"
+    - Выбираем уровень сложности в одну звезду
+    - Выбираем задание
+    - Кликаем на "create battle"
+    - В редакторе вводим решение
+    - Кликаем на кнопку запуска кода
+  expected-result: |
+    После проверки решения будет выведен текст "Woohoo, you're Champion!!!!!"
+
+- summary: |
+    29. Ничья после окончания времени игры
+  requirement: |
+    В случае невыполнения задания в заданное игрой время, результатом игры будет ничья
+  prerequisites:
+    открыта главная страница https://codebattle.hexlet.io/
+    произведен вход в аккаунт
+  test-data: |
+    empty
+  steps:
+    - Кликаем на "create a game"
+    - В "game type" выбираем "with a bot"
+    - Выбираем уровень сложности в одну звезду
+    - Выбираем минимальное время игры
+    - Кликаем на "create battle"
+    - Ждем пока игровое время кончится
+  expected-result: |
+    После окончания времени будет выведено сообщение "Time is up. There are no winners in the game"
+
+- summary: |
+    30. Подтверждение e-mail при регистрации
+  requirement: |
+    При регистрации через e-mail, на него приходит письмо со ссылкой, чтобы подтвердить корректность введенного e-mail
+  prerequisites:
+    открыта страница https://codebattle.hexlet.io/
+  test-data: |
+    - Nickname = TestEmail
+    - Email = alexandra.grigorchenko@gmail.com
+    - Password = strongPassword
+  steps:
+    - Кликаем на кнопку "Sign up"
+    - Вводим Nickname
+    - Вводим Email
+    - Вводим Password
+    - Вводим Password повторно
+    - Нажимаем кнопку "Submit"
+    - Переходим по ссылке из письма, которое пришло на введенную почту
+  expected-result: |
+    На почту придет письмо со ссылкой для подтверждения e-mail, после перехода по ссылке регистрация завершена
+
+- summary: |
+    31. Изменение e-mail
+  requirement: |
+    Пользователь может изменить свой e-mail на другой, не занятый другим пользователем
+  prerequisites:
+    произведен вход в аккаунт с данными Email = badpass@mail.com, Password = strongPassword
+    открыта страница настроек https://codebattle.hexlet.io/settings
+  test-data: |
+    новый e-mail = alex.nsk@gmail.com
+  steps:
+    - Кликаем на кнопку "change e-mail"
+    - В поле "new e-mail" вводим новый e-mail 
+    - Кликаем на кнопку "Save"
+    - На введенную почту придет сообщение со ссылкой для подтверждения адреса
+    - Переходим по ссылке из письма
+  expected-result: |
+    E-mail успешно изменен
